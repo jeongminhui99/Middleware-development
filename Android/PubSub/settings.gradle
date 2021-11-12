@@ -1,0 +1,2 @@
+rootProject.name = "PubSub"
+include ':app'
