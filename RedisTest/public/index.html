@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>socket io redis pub/sub store</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <!-- <script src="/public/js/index.js"></script>  -->
+    <script>
+        var socket = io();
+        //var socket = io.connect('http://<%=host%>');
+        $(document).ready(function(){
+            socket.on('message',function(data){
+                $('#chat').append('<li>'+ data +'</li>');
+                if(data.includes("가위") == true){
+                    $('#가위').removeClass("btn");
+                    $('#가위').addClass("clicked");
+                    $('#보').removeClass("clicked");
+                    $('#바위').removeClass("clicked");
+                    $('#보').addClass("btn");
+                    $('#바위').addClass("btn");
+                } else if(data.includes("바위") == true){
+                    $('#바위').removeClass("btn");
+                    $('#바위').addClass("clicked");
+                    $('#보').removeClass("clicked");
+                    $('#가위').removeClass("clicked");
+                    $('#보').addClass("btn");
+                    $('#가위').addClass("btn");
+                } else if(data.includes("보") == true){
+                    $('#보').removeClass("btn");
+                    $('#보').addClass("clicked");
+                    $('#가위').removeClass("clicked");
+                    $('#바위').removeClass("clicked");
+                    $('#가위').addClass("btn");
+                    $('#바위').addClass("btn");
+                } else {
+                    console.log("nono")
+                    $('#보').removeClass("clicked");
+                    $('#바위').removeClass("clicked");
+                    $('#가위').removeClass("clicked");
+                    $('#보').addClass("btn");
+                    $('#바위').addClass("btn");
+                    $('#가위').addClass("btn");
+                }              
+
+            });
+
+            $('#btnSend').click(function(){
+                send();
+            });
+            $('#btnFinish').click(function(){
+                finish();
+            });
+            $('#inputText').keyup(function(e){
+                if(e.keyCode == 13)
+                    send();
+            });
+        });
+        function finish() {
+            //socket.emit('finish',{})
+            $('#chat').html("<b>Disconnected!</b>");
+        }
+        function send() {
+            var message = $('#inputText').val();
+            var m = {msg:message};
+            console.log(m)
+            if (message.length < 1) return;
+            // socket.emit('message',{message:message});
+            socket.emit('message', m);
+            $('#chat').append('<li>'+message+'</li>');
+            $('#inputText').val('');
+            if(message.includes("가위") == true){
+                $('#가위').removeClass("btn");
+                $('#가위').addClass("clicked");
+                $('#보').removeClass("clicked");
+                $('#바위').removeClass("clicked");
+                $('#보').addClass("btn");
+                $('#바위').addClass("btn");
+            } else if(message.includes("바위") == true){
+                $('#바위').removeClass("btn");
+                $('#바위').addClass("clicked");
+                $('#보').removeClass("clicked");
+                $('#가위').removeClass("clicked");
+                $('#보').addClass("btn");
+                $('#가위').addClass("btn");
+            } else if(message.includes("보") == true){
+                $('#보').removeClass("btn");
+                $('#보').addClass("clicked");
+                $('#가위').removeClass("clicked");
+                $('#바위').removeClass("clicked");
+                $('#가위').addClass("btn");
+                $('#바위').addClass("btn");
+            } else {
+                console.log("nono")
+                $('#보').removeClass("clicked");
+                $('#바위').removeClass("clicked");
+                $('#가위').removeClass("clicked");
+                $('#보').addClass("btn");
+                $('#바위').addClass("btn");
+                $('#가위').addClass("btn");
+            }
+        }
+    </script>
+</head>
+<body>
+    <br>
+    <form>
+        <button class="btn" id="가위">가위</button>
+        <button class="btn" id="바위">바위</button>
+        <button class="btn" id="보">보</button>
+    </form>    
+    <br><br>
+    socketio redis pub/sub chat<br/>
+    <input type="text" id="inputText" />
+    <button id="btnSend">보내기</button> 
+    <!-- <button id="btnFinish">끝내기</button> -->
+    <ul id="chat"></ul>
+</body>
+</html>
