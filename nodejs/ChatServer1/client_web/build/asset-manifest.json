@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eaa59292.css",
+    "main.js": "/static/js/main.22113ac7.js",
+    "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9919edff6283018571ad.ttf",
+    "index.html": "/index.html",
+    "main.eaa59292.css.map": "/static/css/main.eaa59292.css.map",
+    "main.22113ac7.js.map": "/static/js/main.22113ac7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eaa59292.css",
+    "static/js/main.22113ac7.js"
+  ]
+}
