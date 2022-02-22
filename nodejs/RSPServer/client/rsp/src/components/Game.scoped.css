@@ -1,0 +1,100 @@
+.left-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    overflow-x: hidden;
+    background-color: #282c34;
+    color: white;
+}
+
+.right-panel {
+    margin-left: 260px;
+}
+
+.roomname {
+    margin-top: 50px;
+}
+
+
+.btn{
+    width: 100px;
+	height: 100px;
+    margin :20px;
+    border-radius: 50%;
+    background-color: #00000000;
+    border: 3px solid #34495e;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:hover{
+    background-color: #34495e;
+    border-color: white;
+    color: white;
+}
+
+.bn{
+	width: 60px;
+	height: 60px;
+    margin :10px;
+    border: 0px;
+    outline: none;
+}
+
+.buttons{
+    margin-top: 10px;
+}
+
+button {
+    margin: 20px;
+}
+
+.w-btn {
+    
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn:active {
+    transform: scale(1.5);
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-indigo {
+    background-color: aliceblue;
+    color: #282c34;
+}
+
+.score {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 1.2rem;
+    text-align: center;
+    height: 40px;
+    color: #fff;
+    margin-right: 20px;
+}
+
+.score p:first-child {
+    background: #e14a67;
+}
+  
+.score p:last-child {
+    background: #cbcdd4;
+}
