@@ -1,3 +1,12 @@
+.alert-hidden {
+    visibility: hidden;
+}
+
+.alert{
+    color:rgb(233, 60, 60);
+    font-size: small;
+}
+
 .gameicon {
     width: 300px;
     height: 300px;

@@ -11,11 +11,32 @@ function Room(props) {
     const [playroomAlreadySelected, setPlayroomAlreadySelected] = useState(false);
     const [isValid, setisValid] = useState(false); 
     const [name, setName] = useState(props.value);
+    const [alert, setAlert] = useState(false);
     const sessionID = localStorage.getItem("sessionID");
+    const roomID = localStorage.getItem("roomID");
+
+    if(roomID){
+        console.log("roomID:", roomID);
+        if (playroomAlreadySelected == false){
+            setPlayroom(roomID);
+            socket.auth = { sessionID };
+            socket.connect();
+            //player가 목록을 Game.js로 전달하기 위해 
+            //socket.join(roomID);
+            socket.emit("players_list", roomID);
+            setPlayroomAlreadySelected(true);
+        }
+    }
+
+    const error_alert = (event) => {
+        return alert === false ? 'alert-hidden' : 'alert';
+    }
 
     const onSubmit = (event) => {
         event.preventDefault();
         setPlayroomAlreadySelected(true);
+        localStorage.setItem("roomID", playroom);
+        socket.emit("join_playroom", playroom);
     }
 
     function onCreate(){
@@ -39,6 +60,15 @@ function Room(props) {
         setName(username);
         // attach the session ID to the next reconnection attempts
     });
+
+    socket.on("join_res", (res) => {
+        console.log("join_res ; ", res);
+        if (res == 0) { // 방 인원 초과
+            setAlert(true);
+            setPlayroomAlreadySelected(false);
+        }
+    });
+
   
 
     return(
@@ -52,18 +82,24 @@ function Room(props) {
                 </p>
                 <form onSubmit={onSubmit}>
                     <input placeholder="Enter playroom..." onChange={e => setisValid(isvalid(e.target.value))}/>
+                    <br/><br/>
+                    <div className={error_alert()}>
+                        해당 방은 이미 꽉 찼습니다.
+                    </div>
                     <br/>
                     <button className="w-btn-neon2" disabled={!isValid}>Play</button>
                 </form> 
-                <form onSubmit={onCreate}>
+                {/* <form onSubmit={onCreate}>
+
                     <input placeholder="Enter playroom..." onChange={e => setisValid(isvalid(e.target.value))}/>
                     <br/>
                     <button className="w-btn-neon2" disabled={!isValid}>Play</button>
-                </form> 
+                </form>  */}
                 <button className="w-btn-neon" onClick={SessionOut}>SESSION OUT</button>
-            </header> : <Game value={playroom}/> }
+            </header> : <Game setPlayroomAlreadySelected={setPlayroomAlreadySelected} value={playroom} player={name}/> }
         </div>
     )
 }
 
 export default Room;
+

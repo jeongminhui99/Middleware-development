@@ -94,7 +94,55 @@ button {
 .score p:first-child {
     background: #e14a67;
 }
+
+.score p:last-child {
+    background: #86bb71;
+}
+
+/* .score.ready p:first-child {
+    background: #504e4e;
+}
+
+.score p:first-child {
+    background: #e14a67;
+}
   
 .score p:last-child {
-    background: #cbcdd4;
+    background: #86bb71;
+} */
+
+.w-btn-neon {
+    position: relative;
+    border: none;
+    min-width: 200px;
+    min-height: 50px;
+    background: linear-gradient(
+        90deg,
+        rgb(145, 165, 163) 0%,
+        rgb(102, 126, 123) 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px rgba(102, 126, 123, 0.64);
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.w-btn-neon:hover {
+    transform: scale(1.2);
+}
+
+.w-btn-neon:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #94c7bd;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
 }

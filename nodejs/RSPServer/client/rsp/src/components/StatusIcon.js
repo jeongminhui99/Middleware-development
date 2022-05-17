@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
 import "./StatusIcon.scoped.css";
 
-export default function StatusIcon({ connected }) {
+export default function StatusIcon({ check }) {
     return (
-        <i className={`${connected ? 'connected' : ''} icon`}></i>
+        <i className={`${check ? 'connected' : ''} icon`}></i>
     );
 }

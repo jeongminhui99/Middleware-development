@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import '../App.css';
+import socket from "../socket";
 import logo from '../logo.svg';
 
 
@@ -11,6 +12,8 @@ function Username(props){
     function sendName(event){
         event.preventDefault();
         props.getNickname(name);
+        socket.connect();
+        socket.emit("jsonTest", "OK");
     }
 
     const isvalid = (nickname) => {
